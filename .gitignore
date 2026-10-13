@@ -1,0 +1,11 @@
+node_modules
+dist
+.vercel
+.DS_Store
+scripts/pdf/img
+scripts/pdf/portfolio.html
+.claude/settings.local.json
+asset-face-nhi
+scripts/captures
+scripts/pdf
+*.log

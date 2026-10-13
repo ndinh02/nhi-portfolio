@@ -1,0 +1,173 @@
+@import "tailwindcss";
+@import "@fontsource-variable/instrument-sans/wdth.css";
+@import "@fontsource/instrument-serif/400.css";
+@import "@fontsource/instrument-serif/400-italic.css";
+@import "@fontsource-variable/jetbrains-mono";
+@import "@fontsource/silkscreen/400.css";
+
+@theme {
+  --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, Menlo, monospace;
+  --font-pixel: "Silkscreen", "JetBrains Mono Variable", monospace;
+
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-panel: var(--panel);
+  --color-alert: var(--alert-text);
+}
+
+/* Site shell: cool studio white with one deep berry signal colour (calmer than a saturated blue, and it
+   belongs with the sakura, the pink doodles and the contact pink).
+   Contrast: muted 6.3:1 / 5.8:1 (paper/panel), accent 7.4:1 / 6.8:1, paper on accent 7.9:1 */
+:root {
+  --alert-text: #b3261e;
+  --paper: #f6f7f9;
+  --ink: #0e1116;
+  --muted: #555c68;
+  --line: #dde0e6;
+  --accent: #8b2f5c;
+  --panel: #eceef3;
+}
+
+/* SiviCamp: taken from her own brand guide (#512FAD brand purple, #F4D6FF highlight) */
+.theme-sivi {
+  --paper: #140a2e;
+  --ink: #f6efff;
+  --muted: #b3a3d6;
+  --line: #3a2a66;
+  --accent: #cab1fd;
+  --panel: #1f1244;
+}
+
+/* ekkodale / hugo: navy of the official hugo mark + ekkodale mint */
+.theme-ekko {
+  --paper: #eef6f4;
+  --ink: #0b1c3d;
+  --muted: #4d5a72;
+  --line: #c9ddd7;
+  --accent: #0a6b64;
+  --panel: #dcece7;
+}
+
+/* LiveTicker: the product's own palette (canvas #0D0D10, paper #F5F3EF, signal #C9F24A, alert #DC3C2E) */
+.theme-lt {
+  --paper: #0d0d10;
+  --ink: #f5f3ef;
+  --muted: #8f8d88;
+  --line: #26262c;
+  --accent: #c9f24a;
+  --panel: #16161b;
+  --alert: #dc3c2e;
+  --alert-text: #ef5a4c; /* brand red is 4.1:1 on panel, too low for small text; this is 5.4:1 */
+}
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+html, body { overflow-x: clip; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* selected text uses the berry of the rotating hero word, on every page */
+::selection { background: #8b2f5c; color: #ffffff; }
+
+.display {
+  font-family: var(--font-sans);
+  font-stretch: 88%;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 0.92;
+}
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+/* reading copy: short lines, generous leading, clear gaps between paragraphs */
+.prose-case p { max-width: 58ch; line-height: 1.7; color: color-mix(in oklab, var(--ink) 85%, var(--paper)); }
+.prose-case p + p { margin-top: 1.25em; }
+
+/* one rhythm for every content section */
+.section { padding-block: clamp(3.5rem, 8vw, 7rem); }
+
+/* no orphans: headings balance their lines, body copy avoids a lonely last word */
+h1, h2, h3 { text-wrap: balance; }
+p, li, dd { text-wrap: pretty; }
+
+.gutter { padding-inline: clamp(1rem, 4vw, 3.5rem); }
+
+/* subtle pixel grid for the SiviCamp page */
+.pixel-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--accent) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--accent) 7%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ekkodale: a blueprint, fine lines every 24px and a stronger line every 120px (construction drawing) */
+.blueprint-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--ink) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--ink) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to right, color-mix(in oklab, var(--ink) 3%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--ink) 3%, transparent) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+}
+
+/* LiveTicker: a faint dot matrix like a stadium scoreboard */
+.signal-grid {
+  background-image: radial-gradient(color-mix(in oklab, var(--accent) 12%, transparent) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
+/* own projects: a quiet sketchbook dot grid */
+.dot-grid {
+  background-image: radial-gradient(color-mix(in oklab, var(--accent) 16%, transparent) 1px, transparent 1.2px);
+  background-size: 20px 20px;
+}
+
+/* long page captures scroll inside their browser frame on hover; the frame sets the height,
+   so any frame size or aspect ratio works */
+.scroll-shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top;
+  transition: object-position 6s cubic-bezier(.45,0,.25,1); }
+.scroll-shot:hover img, .scroll-shot:focus img { object-position: bottom; }
+@media (prefers-reduced-motion: reduce) { .scroll-shot img { transition: none; } }
+
+/* keyframes Fancy's CirclingElements expects from its tailwind config */
+@keyframes circling {
+  0% {
+    transform: translate(-50%, -50%) rotate(calc(var(--circling-offset) * 1deg))
+      translate(calc(var(--circling-radius) * 1px), 0) rotate(calc(var(--circling-offset) * -1deg));
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(calc(var(--circling-offset) * 1deg + 360deg * var(--circling-direction)))
+      translate(calc(var(--circling-radius) * 1px), 0)
+      rotate(calc(var(--circling-offset) * -1deg - 360deg * var(--circling-direction)));
+  }
+}
+@media (prefers-reduced-motion: reduce) { .animate-circling { animation-play-state: paused !important; } }
+
+/* Figma effect demos: endless type band */
+@keyframes fxmarquee { from { transform: translateX(0); } to { transform: translateX(-25%); } }
+
+/* paper cut-out faces: stop-motion jitter, a few hand-held frames per second */
+@keyframes paper-jitter {
+  0%   { transform: rotate(-1.4deg) translate(0, 0); }
+  25%  { transform: rotate(1deg) translate(1px, -2px); }
+  50%  { transform: rotate(-0.4deg) translate(-1px, 1px); }
+  75%  { transform: rotate(1.6deg) translate(0, -1px); }
+  100% { transform: rotate(-1.4deg) translate(0, 0); }
+}
+.paper-jitter { animation: paper-jitter 1.1s steps(1, end) infinite; }
+.paper-jitter:hover { animation-duration: 0.45s; }
