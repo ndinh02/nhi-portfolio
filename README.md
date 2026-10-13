@@ -25,7 +25,3 @@ npm run build       # production build
 - `public/` has the images, face photos and videos.
 - `agents/` has the step-by-step agent briefs I use to plan, write, build and check the site.
 - `AGENTS.md` has the design brief: colors, fonts, tone and things to avoid.
-
-## Notes
-
-Screenshots stay un-retouched first. Contact details only go on the site when I approve them.
